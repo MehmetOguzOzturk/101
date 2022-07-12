@@ -28,13 +28,17 @@ public class GameManager : MonoBehaviour
             {
                 closestSnapPoint = snapPos;
                 closestDistance = currenDistance;
-                
+                            
             }
         }
 
         if (closestSnapPoint!=null && closestDistance<=snapRange)
         {
             dragable.transform.localPosition = closestSnapPoint.localPosition;
+            dragable.MoveOnX(dragAbleObjects);
+
         }
+
+        
     }
 }

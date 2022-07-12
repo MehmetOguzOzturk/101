@@ -8,15 +8,16 @@ public class HoldAndDrag : MonoBehaviour
     float startPosY;
     float startPosZ;
     bool isHold;
+    GameManager gameManager;
 
     public delegate void DragEndenDelegete(HoldAndDrag dragableObject);
 
     public DragEndenDelegete dragEndenCallBack;
 
-    // Update is called once per frame
+  
     void Update()
     {
-        if (isHold )
+        if (isHold)
         {
             Vector3 mousePos;
             mousePos = Input.mousePosition;
@@ -25,6 +26,23 @@ public class HoldAndDrag : MonoBehaviour
             gameObject.transform.localPosition = new Vector3(mousePos.x - startPosX, mousePos.y - startPosY, transform.position.z);
         }
 
+
+    }
+
+    public void MoveOnX(List<HoldAndDrag> dragObjects)
+    {
+        foreach (var item in dragObjects)
+        {
+            if (gameObject != item.gameObject)
+            {
+                if (transform.position == item.gameObject.transform.position)
+                {
+                    item.gameObject.transform.position = new Vector3(item.gameObject.transform.position.x + 0.6f, item.gameObject.transform.position.y, item.gameObject.transform.position.z);
+
+                }
+            }
+
+        }
     }
 
     private void OnMouseDown()
